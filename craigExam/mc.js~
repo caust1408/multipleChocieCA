@@ -1,0 +1,9 @@
+$(document).ready(function() {
+	$('#loading').click(function() {
+		$.getJSON('cc.json', function(cc) {
+			$('#result').append('<p>' + cc.text + '<br/> Question:' + cc.answer + '<br/> Answer: ' + cc.decoys + '<br/> deocys: '+ '</p>');
+		});
+
+	});
+
+});

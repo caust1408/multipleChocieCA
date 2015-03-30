@@ -13,7 +13,7 @@
    <div id="result"></div>
    <script> 
      $(document).ready(function() {
-	$.getJSON('cc.json', function(data) {
+	$.getJSON('mm.json', function(data) {
 		document.write(data.text);
 		});
 	});

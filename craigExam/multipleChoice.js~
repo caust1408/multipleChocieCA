@@ -1,4 +1,4 @@
-var MULTIPLE = [ 
+var MULTIPLE = ["{questions": [ +
   {text: "First state to legalize gay marriage", answer: "Massachusetts", decoys: ["California", "Oregon", "New York", "Indiana", "Mississippi" ] },
   {text: "The last state to join the union", answer: "Hawaii", decoys: ["Alaska", "Arizona", "Kansas" ] },
   {text: "Harry Truman\'s home state", answer: "Missouri", decoys: ["Illinois", "Kansas", "Indiana", "Ohio", "Kentucky" ] },
