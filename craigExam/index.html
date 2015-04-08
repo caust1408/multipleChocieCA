@@ -3,23 +3,128 @@
 <head>
    <meta charset="UTF-8">
    <title></title>
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   
+   <script src="components/webcomponentsjs/webcomponents.js"></script>
+   <link rel="import" href="components/paper-radio-button/paper-radio-button.html">
+   <!-- <link rel="import" href="paper-radio-group.html"> -->
+   <link rel="import" href="components/font-roboto/roboto.html">
+   <link rel="import" href="components/core-elements/core-elements.html">
+
    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  
+   <script text="text/javascript" src="mm.js"></script>
+   <script text="text/javascript" src="cc.json"></script>
+
+
+   <style shim-shadowdom>
   
    
-   <body>
+   body {
+   
+   
+   	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+	margin: 0;
+	padding: 24px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	}
+		paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+		color: #4285f4;
+		}
+		paper-radio-group.blue paper-radio-button::shadow #onRadio {
+		background-color: #4285f4;
+		}
+		paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+		border-color: #4285f4;
+		}
+		paper-radio-button {
+		display: block;
+		}
+														
+		</style>
+		</head>
+	<body unresolved>
+
+    <!--   <fieldset data-role="controlgroup">
+       	<legend id="hello"></legend>
+	<input type="radio" id="radio1" value="choice-1">
+	<label id="rad1" for="radio-choice-1"></label>
+
+	<input type="radio" name="radio-choice" id="radio2" value="choice-2" />
+	<label id="rad2" for="radio2"></label>
+
+	<input type="radio" name="radio-choice" id="radio3" value="choice-3"  />
+	<label id="rad3" for="radio3"></label>
+
+	<input type="radio" name="radio-choice" id="radio4" value="choice-4"  />
+	<label id="rad4" for="radio4"></label>
+   </fieldset>
+       -->
+   
+
+   <section>
+   
+   <h4 id = 'q1'>Keep Wi-Fi on during sleep</h4>
+   <paper-radio-group selected="always">
+   <paper-radio-button toggles  id = 'rad1' name="always"    label=" "></paper-radio-button>
+   <paper-radio-button toggles  id = 'rad2' name="pluggedin" label=" "></paper-radio-button>
+   <paper-radio-button toggles  id = 'rad3' name= "this"     label=" "></paper-radio-button>
+   <paper-radio-button toggles  id = 'rad4' name= "that"     label=" "></paper-radio-button>
+   </paper-radio-group>
+   </section>
+   <br>
+   
+   <section>
+	   <h4 id='q2'>Wi-Fi frequency band</h4>
+	   <paper-radio-group class="blue" selected="auto">
+	   <paper-radio-button name="auto" label="Auto"></paper-radio-button>
+	   <paper-radio-button name="5ghz" label="5 GHz only"></paper-radio-button>
+	   <paper-radio-button name="2.4ghz" label="2.4 GHz only"></paper-radio-button>
+	   </paper-radio-group>
+   </section>
+
+   <script>
+      var ques = JSON.parse(questions);
+      var dec = 0;
+ 
+         function pText(word) {
+ 	     for (var i = 0;i < ques.length; i++) {
+	        var cur = ques[i];
+		
+		   var x = JSON.stringify(cur.text);
+		   var y1 = JSON.stringify(cur.decoys[dec]);
+		   //var y2 = JSON.stringify(cur.decoys[1]);
+		   //var y3 = JSON.stringify(cur.decoys[2]);
+		   //var y4 = JSON.stringify(cur.decoys[3]);
+		   //var y5 = JSON.stringify(cur.text);
+		   //document.getElementById('rad4').innerHTML = x;
+	           //alert(x);
+		   dec++;
+	     }
+	     //$('#radio1').append('<pre>' + x + '</pre>');
+	     document.getElementById('q1').innerHTML = x;
+	     document.getElementById('rad1').innerHTML = y1;
+	     document.getElementById('rad2').innerHTML = y2;
+	     document.getElementById('rad3').innerHTML = y3;
+	     document.getElementById('rad4').innerHTML = y4;
+	     document.getElementById('q2').innerHTML = y5;
+          }
+
+    pText(ques);
+   </script>
+  
+   <label id="lblti">test</label>
+<script>
+ // document.getElementById('hello').innerHTML = 'your tip has been submitted!';
+</script>
+<script text = "text/javascript" src="mc.js"> </script> 
    <div id="loading">Loading</div>
    <div id="result"></div>
-   <script> 
-     $(document).ready(function() {
-	$.getJSON('cc.json', function(data) {
-		document.write(data.text);
-		});
-	});
-   </script>
 
-   </head>
 
    </body>
    </html>
