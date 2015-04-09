@@ -2,14 +2,17 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title></title>
+   <title>unquote</title>
    
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-   <meta name="mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-capable" content="yes">
    
    <script src="components/webcomponentsjs/webcomponents.js"></script>
    <link rel="import" href="components/paper-radio-button/paper-radio-button.html">
+   <link rel="import" href="components/core-header-panel/core-header-panel.html">
+   <link rel="import" href="components/core-toolbar/core-toolbar.html">
+   <link rel="import" href="components/paper-tabs/paper-tabs.html">
+   <link rel="import" href="post-list.html">
+
    <!-- <link rel="import" href="paper-radio-group.html"> -->
    <link rel="import" href="components/font-roboto/roboto.html">
    <link rel="import" href="components/core-elements/core-elements.html">
@@ -17,33 +20,64 @@
    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
    <script text="text/javascript" src="mm.js"></script>
-   <script text="text/javascript" src="cc.json"></script>
 
 
    <style shim-shadowdom>
   
    
-   body {
+   html,body {
    
-   
-   	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+        height: 100%
+   	font-family: 'RobotoDraft', 'Helvetica Neue', 'Helvetica', Arial;
 	margin: 0;
 	padding: 24px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-touch-callout: none;
 	}
-		paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
-		color: #4285f4;
+	core-header-panel {
+	  height: 100%;
+	  overflow: auto;
+	  -webkit-overflow-scrolling: touch;
+	}
+	core-toolbar {
+		background: #03a9f4;
+		color: white;
+	}
+	#tabs {
+	  width: 100%;
+	  margin: 0;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	  text-transform: uppercase;
+	}
+	.container {
+	  width: 80%;
+	  margin: 50px auto;
+	}
+
+	@media (min-width: 481px) {
+		#tabs {
+		  width: 200px;
 		}
-		paper-radio-group.blue paper-radio-button::shadow #onRadio {
-		background-color: #4285f4;
+		.container {
+		  width: 400px;
 		}
-		paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
-		border-color: #4285f4;
-		}
-		paper-radio-button {
-		display: block;
-		}
+	}
+
+	paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+	  color: #4285f4;
+	}
+	paper-radio-group.blue paper-radio-button::shadow #onRadio {
+	  background-color: #4285f4;
+	}
+	paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+	  border-color: #4285f4;
+	}
+	paper-radio-button {
+	  display: block;
+	}
 														
 		</style>
 		</head>
@@ -64,7 +98,32 @@
 	<label id="rad4" for="radio4"></label>
    </fieldset>
        -->
-   
+    <core-header-panel>
+
+    <core-toolbar>
+
+      <paper-tabs id="tabs" selected="Home" self-end>
+        <paper-tab name ="home">Home</paper-tab>
+        <paper-tab name="test">Test</paper-tab>
+      </paper-tabs>
+
+    </core-toolbar>
+
+    <div class="container" layout vertical center>
+      <post-list show="home"></post-list>
+    </div>
+
+    </core-header-panel>
+
+    <script>
+    var tabs = document.querySelector('paper-tabs');
+    var list = document.querySelector('post-list');
+
+    tabs.addEventListener('core-select', function() {
+      list.show = tabs.selected;
+    });
+    </script>
+
 
    <section>
    
@@ -79,11 +138,11 @@
    <br>
    
    <section>
-	   <h4 id='q2'>Wi-Fi frequency band</h4>
+	   <h4 id='q2'></h4>
 	   <paper-radio-group class="blue" selected="auto">
-	   <paper-radio-button name="auto" label="Auto"></paper-radio-button>
-	   <paper-radio-button name="5ghz" label="5 GHz only"></paper-radio-button>
-	   <paper-radio-button name="2.4ghz" label="2.4 GHz only"></paper-radio-button>
+	   <paper-radio-button name="" label=" "></paper-radio-button>
+	   <paper-radio-button name="" label=" "></paper-radio-button>
+	   <paper-radio-button name="" label=" "></paper-radio-button>
 	   </paper-radio-group>
    </section>
 
@@ -91,15 +150,15 @@
       var ques = JSON.parse(questions);
       var dec = 0;
  
-         function pText(word) {
+         (function pText(word) {
  	     for (var i = 0;i < ques.length; i++) {
 	        var cur = ques[i];
 		
 		   var x = JSON.stringify(cur.text);
-		   var y1 = JSON.stringify(cur.decoys[dec]);
-		   //var y2 = JSON.stringify(cur.decoys[1]);
-		   //var y3 = JSON.stringify(cur.decoys[2]);
-		   //var y4 = JSON.stringify(cur.decoys[3]);
+		   var y1 = JSON.stringify(cur.decoys[0]);
+		   var y2 = JSON.stringify(cur.decoys[1]);
+		   var y3 = JSON.stringify(cur.decoys[2]);
+		   var y4 = JSON.stringify(cur.decoys[3]);
 		   //var y5 = JSON.stringify(cur.text);
 		   //document.getElementById('rad4').innerHTML = x;
 	           //alert(x);
@@ -111,17 +170,15 @@
 	     document.getElementById('rad2').innerHTML = y2;
 	     document.getElementById('rad3').innerHTML = y3;
 	     document.getElementById('rad4').innerHTML = y4;
-	     document.getElementById('q2').innerHTML = y5;
-          }
+	     //document.getElementById('q2').innerHTML = y5;
+          })();
 
-    pText(ques);
    </script>
   
    <label id="lblti">test</label>
 <script>
  // document.getElementById('hello').innerHTML = 'your tip has been submitted!';
 </script>
-<script text = "text/javascript" src="mc.js"> </script> 
    <div id="loading">Loading</div>
    <div id="result"></div>
 
